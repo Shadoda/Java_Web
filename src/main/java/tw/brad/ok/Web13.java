@@ -18,6 +18,9 @@ public class Web13 extends HttpServlet {
 		RequestDispatcher dispatcher =  
 				request.getRequestDispatcher("Web14");
 		
+		request.setAttribute("x", 123);
+		request.setAttribute("y", 456);
+		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<h1>Cathay</h1>");
