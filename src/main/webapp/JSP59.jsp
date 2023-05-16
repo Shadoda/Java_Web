@@ -42,7 +42,7 @@
 			<tr>
 				<th>#</th>
 				<th>Name</th>
-				<th>faeture</th>
+				<th>feature</th>
 				<th>Photo</th>
 			</tr>
 			
