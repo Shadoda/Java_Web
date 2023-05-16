@@ -7,23 +7,44 @@ window.onload = function() {
 	let log = document.getElementById('log');
 
 	let webSocket;
-	
+
 	start.addEventListener("click", function() {
 		connect();
 	});
+	
+	send.addEventListener("click",function(){
+		console.log("send...");
+		var message = {
+			message : mesg.value
+		}
+		webSocket.send(JSON.stringify(message));
+	})
 
 	start.style.display = "block";
 	mesgDiv.style.display = "none";
 
 	function connect() {
 		console.log("connecting...");
-		webSocket = new WebSocket("ws://localhost:8080/WEB/myserver");
-		webSocket.onerror = function(event){
+		webSocket = new WebSocket("ws://10.0.104.190:8080/MyWeb2/myserver");
+		
+		webSocket.onerror = function(event) {
 			console.log("ERROR");
 		};
-		webSocket.onopen = function(event){
-			console.log("opened");
+		webSocket.onopen = function(event) {
+			console.log("Open");
+			start.style.display = "none";
+			mesgDiv.style.display = "block";
 		};
+		webSocket.onclose = function(event) {
+			console.log("close");
+			start.style.display = "block";
+			mesgDiv.style.display = "none";
+		}
+		webSocket.onmessage = function(event){
+			//message = event.data
+			var obj = JSON.parse(event.data);
+			log.innerHTML += obj.message + "<BR>";
+		}
 	}
 
 }
